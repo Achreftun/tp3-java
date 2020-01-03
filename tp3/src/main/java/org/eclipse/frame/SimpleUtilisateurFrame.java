@@ -1,5 +1,8 @@
 package org.eclipse.frame;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -8,20 +11,19 @@ import javax.swing.JTextField;
 import org.eclipse.dao.UtilisateurDaoImpl;
 import org.eclipse.model.Utilisateur;
 
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class InscriptionFrame extends JFrame{
+public class SimpleUtilisateurFrame extends JFrame{
 	private JLabel lblNom = new JLabel("Nom");
 	private JLabel lblPrnom = new JLabel("Prénom");
 	private JTextField nomText = new JTextField();
 	private JTextField prenomText = new JTextField();
 	JComboBox sexeBox = new JComboBox();
 	
-	public InscriptionFrame() {
+	public SimpleUtilisateurFrame(Utilisateur simpletilisateur) {
+		nomText.setText(simpletilisateur.getNom());
+		prenomText.setText(simpletilisateur.getPrenom());
+		sexeBox.setModel(new DefaultComboBoxModel(new String[] {"Homme", "Femme"}));
+
+		sexeBox.setSelectedItem(simpletilisateur.getSexe() == 'h' ? "Homme" : "Femme");
 		setVisible(true);
 		setSize(500, 500);
 		setTitle("Inscription");
@@ -43,7 +45,6 @@ public class InscriptionFrame extends JFrame{
 		prenomText.setBounds(177, 100, 86, 20);
 		getContentPane().add(prenomText);
 		
-		sexeBox.setModel(new DefaultComboBoxModel(new String[] {"Homme", "Femme"}));
 		sexeBox.setBounds(177, 157, 86, 20);
 		getContentPane().add(sexeBox);
 		
@@ -61,8 +62,6 @@ public class InscriptionFrame extends JFrame{
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Votre compte a été créé avec succès");
-				SimpleUtilisateurFrame simpleUtilisateurFrame = new SimpleUtilisateurFrame(insertedUtilisateur);
-				this.dispose();
 			}
 		});
 		btnInscription.setBounds(177, 212, 89, 23);
