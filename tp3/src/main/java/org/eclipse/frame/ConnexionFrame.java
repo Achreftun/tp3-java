@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class ConnexionFrame extends JFrame implements ActionListener {
-	private JTextField nomText= new JTextField();
-	private JTextField prenomText= new JTextField();
+	private JTextField nomText = new JTextField();
+	private JTextField prenomText = new JTextField();
 	private JButton btnInscription = new JButton("Inscription");
 	private JButton btnConnexion = new JButton("Connexion");
 	private static int nbrConnexion = 0;
@@ -25,32 +25,32 @@ public class ConnexionFrame extends JFrame implements ActionListener {
 		setSize(500, 500);
 		setTitle("Connexion");
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblNomDutilisateur = new JLabel("Nom d'utilisateur");
 		lblNomDutilisateur.setBounds(51, 74, 117, 14);
 		getContentPane().add(lblNomDutilisateur);
-		
+
 		JLabel lblMotDePasse = new JLabel("Mot de passe");
 		lblMotDePasse.setBounds(51, 120, 103, 14);
 		getContentPane().add(lblMotDePasse);
-		
+
 		nomText.setBounds(214, 71, 111, 20);
 		getContentPane().add(nomText);
 		nomText.setColumns(10);
-		
+
 		prenomText.setBounds(214, 117, 111, 20);
 		getContentPane().add(prenomText);
 		prenomText.setColumns(10);
-		
+
 		btnInscription.setBounds(51, 183, 117, 23);
 		getContentPane().add(btnInscription);
-		
+
 		btnConnexion.setBounds(214, 183, 111, 23);
 		getContentPane().add(btnConnexion);
-		
+
 		btnInscription.addActionListener(this);
 		btnConnexion.addActionListener(this);
-		
+
 	}
 
 	@Override
@@ -65,18 +65,20 @@ public class ConnexionFrame extends JFrame implements ActionListener {
 			if (utilisateur == null) {
 				if (nbrConnexion == 3) {
 					this.dispose();
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Identifiant(s) incorrect(s)");
 				}
-			}else {
+			} else {
 				if (utilisateur.getType() == 'a') {
 					System.out.println("vous êtes administrateur");
-				}
-				else {
+				} else {
 					System.out.println("vous êtes simple");
 				}
+				this.dispose();
 			}
+		} else {
+			InscriptionFrame inscriptionFrame = new InscriptionFrame();
+			this.dispose();
 		}
 	}
 }
